@@ -12,23 +12,26 @@ const approuter=createBrowserRouter([{
   
   path:"/",
   element:<Body/>,
-  children:[{
+  children:[
+    {
     path: "/",
-  element:<MainContainer/>},
+  element:<MainContainer/>
+},
   
 {
   path: "watch",
   element:<WatchPage/>}
   
-  ]
-
+  ],
 }])
 
   return (
     <Provider store={appstore}>
      
-      <Head/>
-      <RouterProvider router={approuter}><Body/></RouterProvider>
+     <Head/>
+      <RouterProvider router={approuter}><Body/>
+      
+      </RouterProvider>
   
     </Provider>
   );

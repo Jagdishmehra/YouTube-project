@@ -2,10 +2,14 @@ import React from 'react'
 import { IoLogoLinkedin } from "react-icons/io";
 import { BiLogoGithub } from "react-icons/bi";
 import { Link } from 'react-router-dom';
+
 const VideoCard = ({videodata}) => {
-  console.log(videodata);
+
+  //console.log(videodata);
+  // console.log(videoid);
+
   const {snippet,statistics}=videodata;
-  const {channelTitle, localized,thumbnails,publishedAt}=snippet;
+  const {channelTitle, localized,thumbnails}=snippet;
   
   function handleViews(){
     const num=statistics.viewCount;

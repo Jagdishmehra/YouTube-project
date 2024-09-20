@@ -12,7 +12,7 @@ const SidebarSlice=createSlice({
         },
         notshowsidebar:(initialState)=>{
             initialState.showMenu= false
-        }
+        },
     }
 })
 export const {togglesidebar, notshowsidebar} = SidebarSlice.actions;

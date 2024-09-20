@@ -9,7 +9,6 @@ import { IoIosMusicalNote } from "react-icons/io";
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-
 const SideBar = () => {
 
   const showsidebar=useSelector((store)=>store.sidebar.showMenu)
