@@ -6,6 +6,7 @@ import { appendchats } from '../constants/ChatSlice';
 import { generateRandomNames, randomStringgenerator } from '../constants/helper';
 
 const LiveChat = () => {
+    const [showchat,setshowchat]=useState(false)
     const[showmessage,setshowmessage]=useState("")
     const dispatch=useDispatch()
     const messages=useSelector(store=>store.chat.chats)
@@ -21,7 +22,10 @@ const LiveChat = () => {
         },[])
 
   return (
-     <><div className='bg-gray-200 flex flex-col-reverse overflow-y-scroll border border-gray-300 mx-2 rounded-t-lg px-2 h-[530px]'>
+     <div><button onClick={()=>setshowchat(!showchat)} 
+     className='flex justify-center mx-8 rounded-full p-2 border border-gray-300 w-[80%] bg-gray-200'> Show Live chat</button>
+     {showchat && <div>
+     <div className='bg-gray-200 mt-2 flex flex-col-reverse overflow-y-scroll border border-gray-300 mx-2 rounded-t-lg px-2 h-[530px]'>
       {messages.map((mess,index)=><LiveChatCards 
       key={index}
       name={mess.name}
@@ -47,7 +51,8 @@ className='mx-4 '>
 <IoMdSend className='text-3xl' />
 </button>   
     </form>
-   </>
+    </div>}
+   </div>
   )
 }
 

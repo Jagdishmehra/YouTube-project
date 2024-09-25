@@ -24,7 +24,7 @@ useEffect(()=>{
 
   return (
    <div className='flex flex-wrap  w-full h-screen overflow-auto'>
-        {Object.values(moviedata).map((movie)=><Link to={"/watchmovie?v="+ movie.id}key={movie.id}> 
+        {Object.values(moviedata).map((movie)=><Link to={"/movie/watchmovie?v="+ movie.id}key={movie.id}> 
         <MovieCard movie={movie} />
 </Link>)}
 </div>
