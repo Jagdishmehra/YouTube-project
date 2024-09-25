@@ -23,7 +23,8 @@ const LiveChat = () => {
 
   return (
      <div><button onClick={()=>setshowchat(!showchat)} 
-     className='flex justify-center mx-8 rounded-full p-2 border border-gray-300 w-[80%] bg-gray-200'> Show Live chat</button>
+     className='flex justify-center mx-8 rounded-full p-2 border border-gray-300 w-[80%] bg-gray-200'> 
+     {showchat ?'Collapse Live Chat':"Show Live chat"}</button>
      {showchat && <div>
      <div className='bg-gray-200 mt-2 flex flex-col-reverse overflow-y-scroll border border-gray-300 mx-2 rounded-t-lg px-2 h-[530px]'>
       {messages.map((mess,index)=><LiveChatCards 
