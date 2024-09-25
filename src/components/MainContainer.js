@@ -6,7 +6,7 @@ const MainContainer = () => {
   return (
     <div className='w-full overflow-hidden'> 
       <ButtonsList/>
-      <VideoContainer/>
+      <VideoContainer style={{height:"100vh", overflowY:'auto'}}/>
     </div>
   )
 }

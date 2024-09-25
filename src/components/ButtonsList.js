@@ -12,4 +12,4 @@ const ButtonsList = () => {
   )
 }
 
-export default ButtonsList
+export default ButtonsList;

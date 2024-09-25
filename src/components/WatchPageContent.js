@@ -2,12 +2,17 @@ import React, { useEffect, useState } from 'react'
 import { YOUTUBE_API } from '../constants/Images';
 import { FaGithub } from "react-icons/fa";
 import { BiLike } from "react-icons/bi";
+import { BiSolidLike } from "react-icons/bi";
 import { BiDislike } from "react-icons/bi";
 import { PiShareFatLight } from "react-icons/pi";
 import { GoDownload } from "react-icons/go";
 import CommentData from './CommentData';
+import Footer from './Footer';
 
 const WatchPageContent = ({videoid}) => {
+    const[subscribers,setsubs]=useState()
+    const[liked,setlike]=useState(true)
+    const [buttontick,setbuttontick]=useState(false);
     const[requiredVideo,setrequiredVideo]=useState([]);
     const [videodata,setvideodata]=useState('')
     const [show,setshow]=useState(false);
@@ -15,17 +20,19 @@ const WatchPageContent = ({videoid}) => {
         const browserdata=async()=>{
             const data=await fetch(YOUTUBE_API);
             const json=await data.json()
-            //console.log(json.items);
             setrequiredVideo(json.items);
         }
         useEffect(()=>{
-           browserdata()  
+           browserdata() 
+           let num=Math.random()*10
+                if(num>1){
+                const number=num.toFixed(2)+'M'
+                     setsubs(number) 
+                    } 
         },[])
         useEffect(()=>{
             if(requiredVideo.length>0&&videoid){
                 const searchvideo=requiredVideo.find((v)=>v.id===videoid)
-                console.log(searchvideo);
-                //console.log('run')
                     setvideodata(searchvideo);
                }
         },[videoid,requiredVideo])
@@ -47,15 +54,8 @@ const WatchPageContent = ({videoid}) => {
                   else if(num>=1000&&num<10000000) return((num/1000).toFixed(0)+'K')
                 else return num;
               };
-              function subscribers(){
-                let num=Math.random()*10
-                //console.log(num)
-                if(num>1){
-                const number=num.toFixed(2)+'M'
-                        //console.log(number)
-                    return number
-                    }
-              };
+              
+              
   return (
     <div>
       <h1 className='mt-3 mb-2 text-xl font-bold'>{videodata?.snippet?.localized?.title}</h1>
@@ -64,21 +64,31 @@ const WatchPageContent = ({videoid}) => {
       <FaGithub className='cursor-pointer text-4xl mr-4'/>
         <ul className='cursor-pointer'>
             <li className='font-semibold'>{channelTitle}</li>
-                <li className='text-xs font-light'>{subscribers()} subscribers</li>
+                <li className='text-xs font-light'>{subscribers} subscribers</li>
             </ul>
-            <button
-            className='bg-black ml-12 text-sm rounded-full px-3 text-white
-             hover:bg-slate-800 transition-all duration-200'>
-                Subscribe</button>
+            <button onClick={()=>{
+                setbuttontick(!buttontick)
+
+            }}
+            className={`ml-12 text-sm rounded-full px-3
+              transition-all duration-200 ${buttontick ?'bg-gray-100 text-black hover:bg-gray-200':'bg-black text-white hover:bg-slate-800'}`}>
+                {buttontick ?'Subscribed':'Subscribe'}</button>
             </div>
           <div className='flex'>
-                <button className='bg-gray-200 px-4 flex items-center rounded-l-full
-                 text-sm font-bold hover:bg-gray-300 transition-all duration-100'><BiLike className='text-2xl pr-0.5' />{handleViews(likeCount)}</button>
-            <button className='bg-gray-200 px-3 flex items-center rounded-r-full 
+                <button onClick={()=>setlike(!liked)} 
+                className='bg-gray-200 px-4 flex items-center rounded-l-full
+                 text-sm font-bold hover:bg-gray-300 transition-all duration-100'>
+                    {liked?<BiLike className='text-2xl pr-0.5' />
+                    :<BiSolidLike className='text-2xl pr-0.5' />}{handleViews(likeCount)}</button>
+            <button
+            className='bg-gray-200 px-3 flex items-center rounded-r-full 
             text-sm border border-l-gray-100 border-transparent hover:bg-gray-300 transition-all duration-100'>
-                <BiDislike className='text-xl' /></button>
-            <button className='bg-gray-200 px-4 flex items-center text-sm font-bold rounded-full mx-6 hover:bg-gray-300 transition-all duration-100'><PiShareFatLight className='text-xl mr-1' />Share</button>
-            <button className='bg-gray-200 px-4 flex items-center text-sm rounded-full font-bold hover:bg-gray-300 transition-all duration-100'><GoDownload className='text-xl mr-1'/>Download</button>
+                <BiDislike className='text-xl' />
+                </button>
+            <button className='bg-gray-200 px-4 flex items-center text-sm font-bold rounded-full mx-6 hover:bg-gray-300 transition-all duration-100'>
+                <PiShareFatLight className='text-xl mr-1' />Share</button>
+            <button className='bg-gray-200 px-4 flex items-center text-sm rounded-full font-bold hover:bg-gray-300 transition-all duration-100'>
+                <GoDownload className='text-xl mr-1'/>Download</button>
             </div> 
       </div>
 <div  className='mt-3 bg-gray-100 rounded-lg p-1'>              
@@ -89,6 +99,7 @@ const WatchPageContent = ({videoid}) => {
     {show && <p className='whitespace-pre-wrap mx-2'>{description}</p>}
 </div>
 <CommentData comCount={handleViews(commentCount)}/>
+<Footer/>
     </div>
   )
 }

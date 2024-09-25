@@ -39,8 +39,8 @@ const SideBar = () => {
       <ul className='ml-2'>
       <li className='mt-6 font-bold  text-lg px-2 py-2  ml-2'>Explore</li>
       <li className='flex items-center font-light text-sm px-2 py-2 cursor-pointer hover:bg-gray-200 transition-all duration-150 rounded-lg'><IoTrendingUpOutline className='mr-6 ml-2 text-2xl' />Trending</li>
-      <li className='flex items-center font-light text-sm px-2 py-2 cursor-pointer hover:bg-gray-200 transition-all duration-150 rounded-lg'><BiMoviePlay className='mr-6 ml-2 text-2xl'/>Movies</li>
-      <li className='flex items-center font-light text-sm px-2 py-2 cursor-pointer hover:bg-gray-200 transition-all duration-150 rounded-lg'><IoIosMusicalNote className='mr-6 ml-2 text-2xl'/>Music</li>
+      <Link to="/movie"><li className='flex items-center font-light text-sm px-2 py-2 cursor-pointer hover:bg-gray-200 transition-all duration-150 rounded-lg'><BiMoviePlay className='mr-6 ml-2 text-2xl'/>Movies</li>
+      </Link><li className='flex items-center font-light text-sm px-2 py-2 cursor-pointer hover:bg-gray-200 transition-all duration-150 rounded-lg'><IoIosMusicalNote className='mr-6 ml-2 text-2xl'/>Music</li>
      </ul>
     </div>
   )
